@@ -1,3 +1,11 @@
+# torch-resnet-cifar
+
+Forked version from `akamaster/pytorch_resnet_cifar10`, minor update by adding:
+
+* `torchvision.ops.stochastic_depth`
+* batch norm layers and activation functions select-abilities.
+* type-hinting
+
 # Proper ResNet Implementation for CIFAR10/CIFAR100 in Pytorch
 [Torchvision model zoo](https://github.com/pytorch/vision/tree/master/torchvision/models) provides number of implementations of various state-of-the-art architectures, however, most of them are defined and implemented for ImageNet.
 Usually it is straightforward to use the provided models on other datasets, but some cases require manual setup.
