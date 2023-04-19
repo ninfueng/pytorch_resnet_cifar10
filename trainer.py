@@ -221,7 +221,6 @@ def main():
         return
 
     for epoch in range(args.start_epoch, args.epochs):
-
         # train for one epoch
         print("current lr {:.5e}".format(optimizer.param_groups[0]["lr"]))
         train(train_loader, model, criterion, optimizer, epoch)
@@ -269,7 +268,6 @@ def train(train_loader, model, criterion, optimizer, epoch):
 
     end = time.time()
     for i, (input, target) in enumerate(train_loader):
-
         # measure data loading time
         data_time.update(time.time() - end)
 
