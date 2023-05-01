@@ -63,12 +63,12 @@ def _weights_init(m: Union[nn.Linear, nn.Conv2d]) -> None:
 
 
 class LambdaLayer(nn.Module):
-    def __init__(self, lambd: Callable) -> None:
+    def __init__(self, fn: Callable) -> None:
         super().__init__()
-        self.lambd = lambd
+        self.fn = fn
 
     def forward(self, x: Tensor) -> Tensor:
-        return self.lambd(x)
+        return self.fn(x)
 
 
 class BasicBlock(nn.Module):
@@ -116,8 +116,11 @@ class BasicBlock(nn.Module):
             )
 
     def forward(self, x: Tensor) -> Tensor:
-        out = self.act1(self.bn1(self.conv1(x)))
-        out = self.bn2(self.conv2(out))
+        out = self.conv1(x)
+        out = self.bn1(out)
+        out = self.act1(out)
+        out = self.conv2(out)
+        out = self.bn2(out)
         if self.stochastic_depth is not None:
             self.stochastic_depth(out)
         out += self.shortcut(x)
