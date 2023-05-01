@@ -1,6 +1,8 @@
+MODEL:=resnet20
+
 .PHONY: run
 run:
-	./run.sh
+	python -u trainer.py --arch=$(MODEL) --save-dir=save_$(MODEL) | tee -a log_$(MODEL)
 
 .PHONY: fmt
 fmt:

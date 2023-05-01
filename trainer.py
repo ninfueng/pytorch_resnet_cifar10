@@ -23,8 +23,6 @@ model_names = sorted(
     and callable(resnet.__dict__[name])
 )
 
-print(model_names)
-
 parser = argparse.ArgumentParser(description="Propert ResNets for CIFAR10 in pytorch")
 parser.add_argument(
     "--arch",

@@ -204,7 +204,9 @@ class ResNet(nn.Module):
         return nn.Sequential(*layers)
 
     def forward(self, x: Tensor) -> Tensor:
-        out = self.act1(self.bn1(self.conv1(x)))
+        out = self.conv1(x)
+        out = self.bn1(out)
+        out = self.act1(out)
         out = self.layer1(out)
         out = self.layer2(out)
         out = self.layer3(out)
