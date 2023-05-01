@@ -96,14 +96,14 @@ class BasicBlock(nn.Module):
             in_planes, planes, kernel_size=3, stride=stride, padding=1, bias=False
         )
         self.bn1 = bn_layer(planes)
-        self.act_layer1 = act_layer()
+        self.act1 = act_layer()
 
         self.conv2 = nn.Conv2d(
             planes, planes, kernel_size=3, stride=1, padding=1, bias=False
         )
         self.bn2 = bn_layer(planes)
         self.shortcut = nn.Sequential()
-        self.act_layer2 = act_layer()
+        self.act2 = act_layer()
 
         if stride != 1 or in_planes != planes:
             self.shortcut = LambdaLayer(
@@ -116,12 +116,12 @@ class BasicBlock(nn.Module):
             )
 
     def forward(self, x: Tensor) -> Tensor:
-        out = self.act_layer1(self.bn1(self.conv1(x)))
+        out = self.act1(self.bn1(self.conv1(x)))
         out = self.bn2(self.conv2(out))
         if self.stochastic_depth is not None:
             self.stochastic_depth(out)
         out += self.shortcut(x)
-        out = self.act_layer2(out)
+        out = self.act2(out)
         return out
 
 
